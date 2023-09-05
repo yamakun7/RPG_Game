@@ -1,0 +1,35 @@
+{
+    "slime": {
+        "name": "slime",
+        "Lv": 3,
+        "experience_point": 10,
+        "hp": 15,
+        "mp": 3,
+        "attack_power": 4,
+        "magic_power": 2,
+        "speed": 5,
+        "jpName": "スライム"
+    },
+    "gigantes": {
+        "name": "gigantes",
+        "Lv": 10,
+        "experience_point": 80,
+        "hp": 210,
+        "mp": 30,
+        "attack_power": 35,
+        "magic_power": 10,
+        "speed": 15,
+        "jpName": "ギガンテス"
+    },
+    "dark-king": {
+        "name": "dark-king",
+        "Lv": 30,
+        "experience_point": 500,
+        "hp": 500,
+        "mp": 400,
+        "attack_power": 86,
+        "magic_power": 70,
+        "speed": 50,
+        "jpName": "魔王"
+    }
+}

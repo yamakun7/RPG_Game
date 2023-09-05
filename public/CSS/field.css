@@ -1,0 +1,19 @@
+#field-display{
+    text-align: center;
+    width:920px;
+    height:920px;
+    padding-top: 10%;
+    margin:0 auto;
+    position:relative;
+}
+canvas{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#field-canvas{
+    z-index: 1;
+}
+#player-canvas{
+    z-index: 100;
+}

@@ -1,0 +1,46 @@
+{
+    "yusha": {
+        "name": "yusha",
+        "Lv": 1,
+        "experience_point": 0,
+        "hp": 20,
+        "mp": 15,
+        "attack_power": 10,
+        "magic_power": 10,
+        "speed": 10,
+        "jpName": "勇者"
+    },
+    "mashi": {
+        "name": "mashi",
+        "Lv": 1,
+        "experience_point": 0,
+        "hp": 17,
+        "mp": 15,
+        "attack_power": 7,
+        "magic_power": 13,
+        "speed": 8,
+        "jpName": "ギガンテス"
+    },
+    "butouka": {
+        "name": "butouka",
+        "Lv": 1,
+        "experience_point": 0,
+        "hp": 17,
+        "mp": 5,
+        "attack_power": 14,
+        "magic_power": 2,
+        "speed": 16,
+        "jpName": "武闘家"
+    },
+    "souryo": {
+        "name": "souryo",
+        "Lv": 1,
+        "experience_point": 0,
+        "hp": 19,
+        "mp": 18,
+        "attack_power": 7,
+        "magic_power": 7,
+        "speed": 9,
+        "jpName": "僧侶"
+    }
+}
