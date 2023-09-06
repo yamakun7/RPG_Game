@@ -21,5 +21,6 @@ npm startで起動させWebサーバを起動させてください。
 #### 操作方法
 w,a,s,d と方向キーの移動に対応しています。
 
-
+#### 公開場所
+https://rpg-game-09v0.onrender.com
 
