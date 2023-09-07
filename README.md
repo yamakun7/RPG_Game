@@ -22,6 +22,6 @@ npm startで起動させWebサーバを起動させてください。
 w,a,s,d と方向キーの移動に対応しています。
 
 #### 公開場所
-https://rpg-game-09v0.onrender.com
+https://rpg-game-09v0.onrender.com  
 ※サーバがスピンダウンしていると思われますのでアクセス後しばらくお待ちください。
 
