@@ -311,10 +311,7 @@ const magicCommandProcess = () => {
             panelMng.toTarget();
         });
     }
-    if (commandCount != commandInput.length) {
-        console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        commandInput.push("magic");
-    }
+    commandInput.push("magic");
     panelMng.spareReturnButton.addEventListener("click", backToCommand);
 };
 //逃げるときの処理
@@ -483,6 +480,9 @@ const BattleProcess = () => {
                     panelMng.deleteSparePanalAll(); //呪文パネルを破棄
                     panelMng.toCommand(); //コマンド入力に移動
                     commandCount++;
+                    break;
+                default:
+                    console.log("ERROR commandName");
                     break;
             }
             //全員の指示を出したら

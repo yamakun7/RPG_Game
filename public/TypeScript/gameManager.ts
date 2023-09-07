@@ -513,6 +513,9 @@ const BattleProcess=()=>{
                     panelMng.toCommand(); //コマンド入力に移動
                     commandCount++;
                     break;
+                default:
+                    console.log("ERROR commandName");
+                    break;
             }
 
 
