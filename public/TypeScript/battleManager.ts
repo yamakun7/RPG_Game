@@ -13,6 +13,7 @@ export class BattlePanelManager{
 
     spareCommandDiv: HTMLElement; //呪文パネル
     spareCommandButtons: HTMLButtonElement[]; //呪文ボタン
+    spareReturnButton: HTMLButtonElement;
 
     selectEnemyBox: HTMLElement; //敵ボタンの背景
     commandList: NodeListOf<HTMLButtonElement>; //行動のリスト
@@ -29,6 +30,7 @@ export class BattlePanelManager{
 
         this.spareCommandDiv = document.createElement("div");
         this.spareCommandButtons = [];
+        this.spareReturnButton=document.createElement("button");
 
         this.selectEnemyBox  = document.getElementById("select-enemy-box")!;
         this.commandList = this.battleCommandDiv.querySelectorAll(".command")!;
@@ -196,10 +198,10 @@ export class BattlePanelManager{
     //呪文のパネルを作成
     createSparePanel(){
         this.spareCommandDiv = document.createElement("div");
-        this.spareCommandDiv.classList.add("col-4", "box", "d-flex", "justify-content-around", "flex-column", "align-items-end");
+        this.spareCommandDiv.classList.add("col-4", "box", "pos-relative","d-flex", "justify-content-around", "flex-column", "align-items-end");
         this.commandPanel.insertBefore(this.spareCommandDiv, this.selectEnemyBox);
     }
-    
+
     //呪文のボタン作成
     createMagicButton(name: string ,jpName: string, isAble: boolean){
         let btn: HTMLButtonElement = document.createElement("button");
@@ -210,9 +212,18 @@ export class BattlePanelManager{
         this.spareCommandDiv.append(btn);
         this.spareCommandButtons.push(btn);
     }
-
-    disableMagicButton(){
+    
+    //戻るボタンの生成
+    createReturnButton(){
+        let btn: HTMLButtonElement = document.createElement("button");
+        btn.classList.add("return-button-spare");
+        btn.innerText="←";
+        this.spareReturnButton=btn;
+        this.spareCommandDiv.append(this.spareReturnButton);
     }
+
+    // disableMagicButton(){
+    // }
     disableSparePanelAll(){
         this.buttonDisableAll(this.spareCommandButtons);
     }

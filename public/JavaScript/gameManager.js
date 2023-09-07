@@ -303,6 +303,7 @@ const magicCommandProcess = () => {
         let isAble = (players[playersNameArr[commandCount]].getMp() < magicKind[players[playersNameArr[commandCount]].magicTable[i]].spendMp);
         panelMng.createMagicButton(players[playersNameArr[commandCount]].magicTable[i], magicKind[players[playersNameArr[commandCount]].magicTable[i]].jpName, isAble);
     }
+    panelMng.createReturnButton();
     for (let i = 0; i < panelMng.spareCommandButtons.length; i++) {
         panelMng.spareCommandButtons[i].addEventListener(("click"), () => {
             magicInput = panelMng.spareCommandButtons[i].getAttribute("id");
@@ -310,7 +311,11 @@ const magicCommandProcess = () => {
             panelMng.toTarget();
         });
     }
-    commandInput.push("magic");
+    if (commandCount != commandInput.length) {
+        console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        commandInput.push("magic");
+    }
+    panelMng.spareReturnButton.addEventListener("click", backToCommand);
 };
 //逃げるときの処理
 const runAwayCommandProcess = () => {
@@ -355,6 +360,11 @@ const sleep = (time) => {
             resolve(true);
         }, time);
     });
+};
+const backToCommand = () => {
+    console.log("backToCommand!!!!!!!!!!!!!!!!!!!!!");
+    panelMng.deleteSparePanalAll();
+    panelMng.buttonAbleAll(panelMng.commandList);
 };
 let commandInput = new Array(); //コマンドの押下履歴
 let magicInput = "";

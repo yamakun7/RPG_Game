@@ -107,6 +107,10 @@
     margin: 0 0 0 10px;
 }
 
+.pos-relative{
+    position: relative;
+}
+
 .spare-command{
     background-color: dimgrey;
     width:100px;
@@ -115,6 +119,21 @@
     border-radius: 10%;
     color:white;
 }
+
+
+
+.return-button-spare{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    background-color: dimgrey;
+    width: 40px;
+    height:40px;
+    font-size: 22px;
+    border-radius: 10%;
+    color:white;
+}
+
 
 /* こいつはJS側からいじってる */
 .battle-command{
