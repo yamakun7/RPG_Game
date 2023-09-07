@@ -9,6 +9,9 @@
     height:50vh;
     margin: 0 auto;
 }
+.w50{
+    width:50%;
+}
 .btn-pos{
     margin: 0 auto;
 }

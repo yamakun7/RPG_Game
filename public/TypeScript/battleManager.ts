@@ -62,6 +62,7 @@ export class BattlePanelManager{
         playerHp.innerText = "HP: "+hp.toString()+"/"+maxHp.toString();
         playerHp.setAttribute("id", "hp-"+name);
         playerMp.innerText = "MP: "+mp.toString()+"/"+maxMp.toString();
+        playerMp.setAttribute("id", "mp-"+name);
         div.append(playerName);
         div.append(playerHp);
         div.append(playerMp);
@@ -75,10 +76,16 @@ export class BattlePanelManager{
         }
     }
 
-    //プレイヤーのステータスを更新
+    //プレイヤーのHPのステータスを更新
     updatePlayerStatusHp(name: string, max_hp: number, hp: number){
         let playerHp :HTMLElement = document.getElementById("hp-"+name)!;
         playerHp.innerText="HP: "+hp.toString()+"/"+max_hp.toString();
+    }
+
+    //プレイヤーのMPのステータスを更新
+    updatePlayerStatusMP(name: string, max_mp: number, mp: number){
+        let playerMp :HTMLElement = document.getElementById("mp-"+name)!;
+        playerMp.innerText="MP: "+mp.toString()+"/"+max_mp.toString();
     }
 
     //変更したいキャラの名前、色はwhiteかyellowかred
@@ -192,18 +199,24 @@ export class BattlePanelManager{
         this.spareCommandDiv.classList.add("col-4", "box", "d-flex", "justify-content-around", "flex-column", "align-items-end");
         this.commandPanel.insertBefore(this.spareCommandDiv, this.selectEnemyBox);
     }
+    
     //呪文のボタン作成
-    createMagicButton(name: string ,jpName: string){
+    createMagicButton(name: string ,jpName: string, isAble: boolean){
         let btn: HTMLButtonElement = document.createElement("button");
         btn.setAttribute("id", name);
         btn.classList.add("spare-command");
         btn.innerText=jpName;
+        if(isAble) btn.disabled=true;
         this.spareCommandDiv.append(btn);
         this.spareCommandButtons.push(btn);
+    }
+
+    disableMagicButton(){
     }
     disableSparePanelAll(){
         this.buttonDisableAll(this.spareCommandButtons);
     }
+
     //呪文のパネルとボタンを全部削除
     deleteSparePanalAll(){
         while(this.spareCommandDiv.firstChild){

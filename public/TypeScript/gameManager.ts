@@ -299,15 +299,19 @@ const attackCommandProcess=()=>{
     panelMng.toTarget();
 }
 
+//魔法コマンドを作成する
 const magicCommandProcess=()=>{
+    //魔法を覚えてなければ終了
     if(players[playersNameArr[commandCount]].magicTable.length==0){
         console.log("NOTHING")
        return;         
     }
-    panelMng.disableCommand();
-    panelMng.createSparePanel();
+
+    panelMng.disableCommand(); //たたかう、まほう、逃げるのボタンを非有向化します。
+    panelMng.createSparePanel(); //スペアパネルを作成する。
     for(let i=0; i<players[playersNameArr[commandCount]].magicTable.length; i++){
-        panelMng.createMagicButton(players[playersNameArr[commandCount]].magicTable[i], magicKind[players[playersNameArr[commandCount]].magicTable[i]].jpName);
+        let isAble: boolean = (players[playersNameArr[commandCount]].getMp()<magicKind[players[playersNameArr[commandCount]].magicTable[i]].spendMp);
+        panelMng.createMagicButton(players[playersNameArr[commandCount]].magicTable[i], magicKind[players[playersNameArr[commandCount]].magicTable[i]].jpName, isAble);
     }
     for(let i=0;i<panelMng.spareCommandButtons.length;i++){
         panelMng.spareCommandButtons[i].addEventListener(("click"), ()=>{ //魔法ボタン押下
@@ -318,9 +322,9 @@ const magicCommandProcess=()=>{
         });
     }
     commandInput.push("magic");
-
 }
 
+//逃げるときの処理
 const runAwayCommandProcess=()=>{
     console.log("run-away");
     let runawayProbability = Math.floor(Math.random()*100);
@@ -339,8 +343,8 @@ const runAwayCommandProcess=()=>{
         sceneMng.changeScene(player.nowPlace);
         reqFieldProcessID = requestAnimationFrame(fieldProcess);
         musicMng.createMusicBgm("fieldBgm.mp3");
-    }else{ //失敗
-        commandCount=livePlayers;
+    } else{ //失敗
+        commandCount= livePlayers;
         while(battleMng.popBattleMove()){
             console.log("pop");
         }
@@ -357,7 +361,6 @@ const runAwayCommandProcess=()=>{
         //ここで～～の攻撃。の表示を出す。
         let e :Event= new Event("click");
         panelMng.battleLogDiv.dispatchEvent(e);
-        
     }
 }
 
@@ -532,8 +535,12 @@ const BattleProcess=()=>{
     panelMng.battleLogDiv.addEventListener("click", logClickProcess);
 }
 
+let isAbleClick: boolean = true;
+
 //ログ画面クリックを処理する関数
 async function logClickProcess(){
+    if(!isAbleClick) return;
+    isAbleClick=false;
     console.log("click log panel");
     console.log("click log: "+logCount);
     if(isEnemyAppearLog){ //～～があらわれたのログをクリック
@@ -577,7 +584,10 @@ async function logClickProcess(){
         if(endCommandCount==0){
             musicMng.createMusicBgm("stop");
             musicMng.playOneShot("victory.mp3");
+
             await sleep(700);
+            
+            
             if(enemysNameArr.length==1){ //敵が１体の場合
                 panelMng.createLogText(enemys[ancientEnemysNameArr[0]].getJpName()+"をたおした。");
             }else{ //敵が複数体の場合
@@ -699,9 +709,11 @@ async function logClickProcess(){
                         await sleep(300);
                         break;
                     case "magic":
+                        let playerName: string = nowMove.getActionPlayer();
                         musicMng.playOneShot("magicSe01.mp3");
                         await sleep(300);
-                        players[nowMove.getActionPlayer()].mp-=nowMove.spendMp; //MPを引く
+                        players[playerName].mp-=nowMove.spendMp; //MPを引く
+                        panelMng.updatePlayerStatusMP(playerName, players[playerName].getMaxMp(), players[playerName].getMp());
                         break;
                 }
                 target.receiveDamage(nowMove.getPoint());
@@ -739,11 +751,11 @@ async function logClickProcess(){
                 }
                 panelMng.updatePlayerStatusHp(nowMove.getTarget(), target.getMaxHp(), target.getHp());
             }
-
         }
         logCount++;
     }
 
+    isAbleClick=true;
 };
 
 

@@ -290,15 +290,18 @@ const attackCommandProcess = () => {
     commandInput.push("attack");
     panelMng.toTarget();
 };
+//魔法コマンドを作成する
 const magicCommandProcess = () => {
+    //魔法を覚えてなければ終了
     if (players[playersNameArr[commandCount]].magicTable.length == 0) {
         console.log("NOTHING");
         return;
     }
-    panelMng.disableCommand();
-    panelMng.createSparePanel();
+    panelMng.disableCommand(); //たたかう、まほう、逃げるのボタンを非有向化します。
+    panelMng.createSparePanel(); //スペアパネルを作成する。
     for (let i = 0; i < players[playersNameArr[commandCount]].magicTable.length; i++) {
-        panelMng.createMagicButton(players[playersNameArr[commandCount]].magicTable[i], magicKind[players[playersNameArr[commandCount]].magicTable[i]].jpName);
+        let isAble = (players[playersNameArr[commandCount]].getMp() < magicKind[players[playersNameArr[commandCount]].magicTable[i]].spendMp);
+        panelMng.createMagicButton(players[playersNameArr[commandCount]].magicTable[i], magicKind[players[playersNameArr[commandCount]].magicTable[i]].jpName, isAble);
     }
     for (let i = 0; i < panelMng.spareCommandButtons.length; i++) {
         panelMng.spareCommandButtons[i].addEventListener(("click"), () => {
@@ -309,6 +312,7 @@ const magicCommandProcess = () => {
     }
     commandInput.push("magic");
 };
+//逃げるときの処理
 const runAwayCommandProcess = () => {
     console.log("run-away");
     let runawayProbability = Math.floor(Math.random() * 100);
@@ -494,9 +498,13 @@ const BattleProcess = () => {
     //ログ画面をクリックしたら処理を進める。(現在はダメージ処理)
     panelMng.battleLogDiv.addEventListener("click", logClickProcess);
 };
+let isAbleClick = true;
 //ログ画面クリックを処理する関数
 function logClickProcess() {
     return __awaiter(this, void 0, void 0, function* () {
+        if (!isAbleClick)
+            return;
+        isAbleClick = false;
         console.log("click log panel");
         console.log("click log: " + logCount);
         if (isEnemyAppearLog) { //～～があらわれたのログをクリック
@@ -675,9 +683,11 @@ function logClickProcess() {
                             yield sleep(300);
                             break;
                         case "magic":
+                            let playerName = nowMove.getActionPlayer();
                             musicMng.playOneShot("magicSe01.mp3");
                             yield sleep(300);
-                            players[nowMove.getActionPlayer()].mp -= nowMove.spendMp; //MPを引く
+                            players[playerName].mp -= nowMove.spendMp; //MPを引く
+                            panelMng.updatePlayerStatusMP(playerName, players[playerName].getMaxMp(), players[playerName].getMp());
                             break;
                     }
                     target.receiveDamage(nowMove.getPoint());
@@ -722,6 +732,7 @@ function logClickProcess() {
             }
             logCount++;
         }
+        isAbleClick = true;
     });
 }
 ;
