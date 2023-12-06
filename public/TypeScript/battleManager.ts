@@ -222,8 +222,7 @@ export class BattlePanelManager{
         this.spareCommandDiv.append(this.spareReturnButton);
     }
 
-    // disableMagicButton(){
-    // }
+    //呪文パネルを
     disableSparePanelAll(){
         this.buttonDisableAll(this.spareCommandButtons);
     }
@@ -254,6 +253,16 @@ export class BattlePanelManager{
 
 
 //バトル時のキャラクターの行動のクラス
+/*
+　プロパティ
+　・行動名
+　・行動主
+　・対象
+　・ダメージ数
+　・優先度(スピード)
+　・使用MP
+　・味方かどうか
+*/
 export class BattleMove{
     moveName: string;
     actionPlayer: string;

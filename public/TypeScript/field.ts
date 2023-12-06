@@ -14,6 +14,12 @@ class keyboard{
     }
 }
 
+
+//フィールドの操作するプレイヤーのクラス
+/*
+　・x軸の値
+　・y軸の値
+*/
 export class fieldPlayer{
     //画像
     pos_x: number;
@@ -117,10 +123,11 @@ export class fieldPlayer{
         })
     }
     //今の位置のプレイヤーの画像を消す
+    //通れるタイルの時はtrue, 通れないタイルの時はfalseを返す
     canPlayerMove(offset_x: number, offset_y: number):boolean {
         if(this.nowPlace=="field"){
             let pos=mapData.map01[this.pos_y+offset_y][this.pos_x+offset_x];
-            if(pos==1 || pos==5 || pos==6 || pos==7) return true;
+            if(pos==1 || pos==5 || pos==6 || pos==7) return true; //通れるタイル
             //else if(mapData.map01[this.pos_y+offset_y][this.pos_x+ offset_x]==1) return true;
             return false
         }else if(this.nowPlace=="village"){

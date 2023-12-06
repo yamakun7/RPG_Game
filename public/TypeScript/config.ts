@@ -1,10 +1,14 @@
+//フィールドのメタデータ
 export const fieldMetaData: {[key: string]: number} = {
     "blockSize": 32,
     "boardRow": 30,
     "boardCol": 30,
 };
 
-//0が壁 1が通れる
+/*
+　マップデータ
+　0が壁 1が通れる
+*/
 export const mapData: {[key: string]: number[][]} = {
     "map01":[
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0],
@@ -114,8 +118,3 @@ export class characterImageData{
 }
 */
 
-// let playerImage01 = new Image();
-// playerImage01.src="/Image/character/DQ_Slime.jpg";
-// // let playerImage01= document.createElement("img");
-// // playerImage01.src="/Image/character/DQ_Slime.jpg";
-// export default playerImage01;

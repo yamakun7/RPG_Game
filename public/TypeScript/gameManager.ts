@@ -378,7 +378,6 @@ const sleep=(time: number)=>{
 }
 
 const backToCommand=()=>{
-    console.log("backToCommand!!!!!!!!!!!!!!!!!!!!!");
     panelMng.deleteSparePanalAll();
     panelMng.buttonAbleAll(panelMng.commandList);
 }
